@@ -30,7 +30,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         float t2 = (-b + sqrt) / c;
 
         float t = 0;
-        if(t1 < 0 && t2 < 0) t = 0;
+        if(t1 < 0 && t2 < 0) return Vector3.zero;
         else if(t1 < 0) t = t2;
         else if(t2 < 0) t = t1;
         else
@@ -46,7 +46,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            this.transform.forward = CalculateTrajectory();
+            Vector3 aimAt = CalculateTrajectory();
+            if(aimAt != Vector3.zero)
+            this.transform.forward = aimAt;
             CreateBullet();
         }
 }
